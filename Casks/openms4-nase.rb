@@ -1,9 +1,9 @@
 cask "openms4-nase" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.0-ci.1,082f13f6026e"
-  sha256 arm:   "f13871b6df38784d58ef23b31b21d488f276ae55ccdeedc100e22097df6b05f0",
-         intel: "644593292b273ce8c448f45894f1bcfab168e4de27f1e2f7cd3a09a04d382c3b"
+  version "1.0.0-ci.2,a9b317b889cc"
+  sha256 arm:   "35300a3010f4b38c09315917b1294977cf3a2298bf4215f524fbdb408ec25a22",
+         intel: "6f0b7c97096621c0624d10686d843cb3d1aefff045d92b221a83a3e7fec8d25b"
 
   url "https://github.com/okohlbacher/OpenMS4-nase/releases/download/" \
       "nase-v#{version.csv.first}/OpenMS4-nase-macos-#{arch}-Homebrew-#{version.csv.second}.tar.gz"
