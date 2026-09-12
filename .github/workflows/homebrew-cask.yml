@@ -37,5 +37,6 @@ jobs:
           brew tap okohlbacher/openms4-core https://github.com/okohlbacher/OpenMS4-core
           brew tap okohlbacher/openms4-nase https://github.com/okohlbacher/OpenMS4-nase
           brew install --cask okohlbacher/openms4-nase/openms4-nase
-          NucleicAcidSearchEngine --help
+          NucleicAcidSearchEngine -write_ini "$RUNNER_TEMP/NucleicAcidSearchEngine.ini"
+          test -s "$RUNNER_TEMP/NucleicAcidSearchEngine.ini"
           brew uninstall --cask openms4-nase
