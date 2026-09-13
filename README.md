@@ -17,3 +17,24 @@ The two default tests parse generated INI/CTD metadata and check package identit
 Run metadata tests before installing into an already discovered tool prefix, because build and installed manifests would duplicate the NucleicAcidSearchEngine registration. `OPENMS_TOOL_PREFIX_PATH` controls executable discovery, not native library loading. A combined install prefix uses relative Unix library paths; Windows deployments place Core/CLI and their dependency DLLs beside the executable. For separate fixed Unix prefixes, provide `CMAKE_INSTALL_RPATH` explicitly.
 
 `tools.json` owns the executable name/category. `OPENMS4_REQUIRE_CLEAN_SOURCE=ON` rejects uncommitted inputs for published builds. Source archives must provide `OPENMS4_SOURCE_REVISION` and explicitly assert `OPENMS4_SOURCE_DIRTY`; Git checkouts derive them. The standalone CMake helpers are generated copies of the parent experiment's canonical helpers.
+
+<!-- package-graph:begin -->
+## Where this package sits
+
+![OpenMS 4 package architecture](docs/package-architecture.svg)
+
+`nase` builds against the installed **core**, **cli**, **test-data** packages at the revisions recorded in [`dependencies.lock.json`](dependencies.lock.json). No other package builds against it.
+
+| Repository | Relation | Contents |
+| --- | --- | --- |
+| [OpenMS4-core](https://github.com/okohlbacher/OpenMS4-core) | dependency | scientific library, OpenSwathAlgo, readers and writers, runtime data, optional TestSupport |
+| [OpenMS4-cli](https://github.com/okohlbacher/OpenMS4-cli) | dependency | TOPPBase, tool registration and discovery |
+| [OpenMS4-test-data](https://github.com/okohlbacher/OpenMS4-test-data) | dependency | versioned fixtures and the installed numerical suite |
+
+The eighteen repositories are assembled by the parent repository
+[OpenMS4-tests](https://github.com/okohlbacher/OpenMS4-tests), which holds the submodule pins (`packages.lock.json`), the
+dependency-order build runner and the contract tests that keep the graph consistent.
+[`docs/project-state.md`](https://github.com/okohlbacher/OpenMS4-tests/blob/codex/package-split/docs/project-state.md) is the current state
+of the whole project; [`docs/build-split-packages.md`](https://github.com/okohlbacher/OpenMS4-tests/blob/codex/package-split/docs/build-split-packages.md)
+reproduces the installed-SDK build.
+<!-- package-graph:end -->
