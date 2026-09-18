@@ -1,9 +1,9 @@
 cask "openms4-nase" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.0-ci.4,1ab61e144ddb"
-  sha256 arm:   "6641b18a9c7b8ded103824743450a85eb0596c5c535f9e06477b3f46eb5ca6f9",
-         intel: "42e8303f86f78cc284fd03c5f61e4da67c00d0edec0e5e2c910fe15c5ee7891e"
+  version "1.0.0-ci.5,f5be59cd9320"
+  sha256 arm:   "3acfc9110abae00cf898815c5401fdb06a602ac3ef3169e9a47be2c285d52518",
+         intel: "81acd571b3de4d4d68e3619ec1bdf1a6c565e9c4f659555d434e650da4c7186b"
 
   url "https://github.com/okohlbacher/OpenMS4-nase/releases/download/" \
       "nase-v#{version.csv.first}/OpenMS4-nase-macos-#{arch}-Homebrew-#{version.csv.second}.tar.gz"
@@ -21,9 +21,9 @@ cask "openms4-nase" do
   preflight do
     config = "#{HOMEBREW_PREFIX}/opt/openms4-core/lib/cmake/OpenMS/OpenMSConfig.cmake"
     core = File.exist?(config) ? File.read(config)[/set\(OpenMS_SOURCE_REVISION "([0-9a-f]{40})"\)/, 1] : nil
-    next if core == "84847138c0de67149601aaa860af7ac8e2e64534"
+    next if core == "eb58e981d7e0864634b59230874a56a1512369f7"
 
-    raise Cask::CaskError, "openms4-nase #{version.csv.first} was built against openms4-core 84847138c0de, " \
+    raise Cask::CaskError, "openms4-nase #{version.csv.first} was built against openms4-core eb58e981d7e0, " \
                            "but the installed openms4-core is #{core&.slice(0, 12) || "unknown"}. " \
                            "Install the openms4-nase release built for the installed Core."
   end
